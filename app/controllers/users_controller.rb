@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     end
 
     def show #who is logged in
-        user = find_by(id: session[:user_id])
+        user = User.find_by(id: session[:user_id])
         if user
             render json: user 
         else
