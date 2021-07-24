@@ -9,12 +9,20 @@ function App() {
   // const [loggedIn, setLoggedIn] = useState(false)
   // const [user, setUser] = useState({})
   // const history = useHistory()
+  
+  const signupUser = (u) => {
+    setLoggedIn(true)
+    setUser(u)
+    history.pushState('/')
+  } 
 
   return (
     <div className="App">
       <Navbar/>
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/signup" render={routerProps => <SignUpForm {...routerProps} onSignup={signupUser}/>} />
+  
       </Switch>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 
-const SignUpForm = () => {
+const SignUpForm = ({onLogin}) => {
 
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
@@ -20,7 +20,8 @@ const SignUpForm = () => {
                 passwordConfirmation: passwordConfirmation
             })
         })
-        
+        .then(r => r.json())
+        .then(user => onLogin(user))
     }
 
     return (
