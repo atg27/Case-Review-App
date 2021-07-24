@@ -6,10 +6,10 @@ import Home from './Home'
 import Navbar from './NavBar'
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [user, setUser] = useState({})
-  const history = useHistory()
-  
+  // const [loggedIn, setLoggedIn] = useState(false)
+  // const [user, setUser] = useState({})
+  // const history = useHistory()
+
   return (
     <div className="App">
       <Navbar/>
