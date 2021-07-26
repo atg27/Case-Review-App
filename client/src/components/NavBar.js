@@ -9,9 +9,9 @@ const Navbar = (props) => {
             <div>
                 <h1>Hello {props.user.name}!</h1>
                 <br/>
-                <Link to="/signup" >
-                    <button>Signup</button>
-                </Link>
+                {/* <Link to="/logout" >
+                    <button>Logout</button>
+                </Link> */}
             </div>
         )
     } else {
