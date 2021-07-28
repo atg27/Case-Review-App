@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 
-const SignUpForm = ({onLogin}) => {
+const SignUpForm = ({loginUser}) => {
 
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
@@ -21,7 +21,7 @@ const SignUpForm = ({onLogin}) => {
             })
         })
         .then(r => r.json())
-        .then(user => onLogin(user))
+        .then(user => loginUser(user))
     }
 
     return (

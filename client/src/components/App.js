@@ -7,15 +7,16 @@ import Navbar from './NavBar'
 import SignUpForm from './SignUpForm';
 
 
-function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [user, setUser] = useState({})
-  const history = useHistory()
+function App(props) {
+  const history = useHistory();
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
   
-  const signupUser = (u) => {
+  
+  const loginUser = (u) => {
     setLoggedIn(true)
     setUser(u)
-    history.push('/')
+    history.push("/")
   } 
 
   return (
@@ -23,7 +24,7 @@ function App() {
       <Navbar user={user} loggedIn={loggedIn}/>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/signup" render={routerProps => <SignUpForm {...routerProps} onSignup={signupUser}/>} />
+        <Route exact path="/signup" render={routerProps => <SignUpForm {...routerProps} loginUser={loginUser}/>} />
   
       </Switch>
     </div>
