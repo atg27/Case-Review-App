@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
         end
     end
 
-    def destory #logout
+    def destroy #logout
         session.delete :user_id
         head :no_content
     end

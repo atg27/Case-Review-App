@@ -33,9 +33,21 @@ function App(props) {
     history.push("/")
   } 
 
+  const logoutUser = () => {
+    fetch('/logout', {
+      method: 'DELETE'
+    })
+    .then(() => {
+      console.log('logged out')
+      setLoggedIn(false)
+      setUser({})
+    })
+    history.push('/')
+  }
+
   return (
     <div className="App">
-      <Navbar user={user} loggedIn={loggedIn}/>
+      <Navbar user={user} loggedIn={loggedIn} logoutUser={logoutUser}/>
       <Switch>
         <Route exact path="/" component={Home} /> 
         <Route exact path="/signup" render={routerProps => <SignUpForm {...routerProps} loginUser={loginUser}/>} /> 
