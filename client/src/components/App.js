@@ -8,10 +8,24 @@ import SignUpForm from './SignUpForm';
 
 
 function App(props) {
-  const history = useHistory();
+ 
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
-  
+  const history = useHistory();
+
+  useEffect(()=> {
+    fetch('/me')
+    .then(r => {
+      if (r.ok) {
+        r.json()
+        .then(u => {
+          setLoggedIn(true)
+          setUser(u)
+        })
+      }
+    })
+    
+  }, [])
   
   const loginUser = (u) => {
     setLoggedIn(true)
@@ -23,8 +37,8 @@ function App(props) {
     <div className="App">
       <Navbar user={user} loggedIn={loggedIn}/>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/signup" render={routerProps => <SignUpForm {...routerProps} loginUser={loginUser}/>} />
+        <Route exact path="/" component={Home} /> 
+        <Route exact path="/signup" render={routerProps => <SignUpForm {...routerProps} loginUser={loginUser}/>} /> 
   
       </Switch>
     </div>

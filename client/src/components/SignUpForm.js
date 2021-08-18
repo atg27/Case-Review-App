@@ -49,6 +49,7 @@ const SignUpForm = ({loginUser}) => {
                 value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
             />
+            <br/>
             <input type="submit"/>
         </form>
     )
