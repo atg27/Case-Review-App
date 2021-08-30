@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router
 import Home from './Home'
 import Navbar from './NavBar'
 import SignUpForm from './SignUpForm';
+import LoginForm from './LoginForm'
 
 
 function App(props) {
@@ -51,6 +52,7 @@ function App(props) {
       <Switch>
         <Route exact path="/" component={Home} /> 
         <Route exact path="/signup" render={routerProps => <SignUpForm {...routerProps} loginUser={loginUser}/>} /> 
+        <Route exact path="/login" render={routerProps => <LoginForm {...routerProps} loginUser={loginUser}/>} /> 
   
       </Switch>
     </div>
