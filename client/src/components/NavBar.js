@@ -11,7 +11,8 @@ const Navbar = (props) => {
                 <br/>
                 
                     <button onClick={props.logoutUser}>Logout</button>
-                <hr/>
+                    <Link to="/posts"> <button> {props.user.name}'s Posts </button> </Link>
+                    <Link to="/"> <button> {props.username} Home </button> </Link>
             </div>
         )
     } else {

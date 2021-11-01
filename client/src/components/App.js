@@ -79,18 +79,14 @@ function App() {
   }
 
   return (
-
     <div className="App">
-            <div className="App_header">
+             <div className="App_header">
                 <img 
                     className='App_headerImage'
                     src={logo}
                     alt=""
                 />
                 <Navbar user={user} loggedIn={loggedIn} logoutUser={logoutUser}/>
-                
-                
-               
             </div>
           
             <h3> Chest Xray Radiograph Review</h3>
@@ -101,7 +97,7 @@ function App() {
                   </Switch>
 
             {/* <Post caseData={caseData}></Post>  */}
-            
+           
 
             
      
