@@ -1,9 +1,10 @@
 import React from 'react'
+import '../styles/Home.css'
 
  const Home = () => {
     return (
-        <div>
-            <h3> Medical School Finder App</h3>
+        <div >
+            
         </div>
     )
 }

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-
-    #wrap_paramaters: :user, include: [:username, :email, :password, :password_confirmation]
+    #for use with serializer
+    # wrap_paramaters: :user, include: [:username, :email, :password, :password_confirmation] 
 
     def create #signup
         # byebug
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     private
 
 
-    #if erroring add .require(:user).permit
+    #add .require(:user).permit use with serializer, conjunction with wrap params
     def user_params
         params.permit(:name, :password, :password_confirmation)
     end

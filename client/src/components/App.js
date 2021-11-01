@@ -1,18 +1,24 @@
 
-import '../styles/App.css';
+
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom'
 import Home from './Home'
 import Navbar from './NavBar'
 import SignUp from './SignUp';
 import Login from './Login'
+import logo from './xrayicon.png'
+import Post from './Post'
 
 
-function App(props) {
+function App() {
  
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const history = useHistory();
+  const [caseData, setCase] = useState([]);
+  const [errors, setErrors] = useState([]);
+
+
 
   useEffect(()=> {
     fetch('/me')
@@ -27,11 +33,37 @@ function App(props) {
     })
     
   }, [])
+
+  useEffect(() => {
+    fetch("https://secret-beyond-37975.herokuapp.com/https://openi.nlm.nih.gov/api/search?coll=mpx&m=1&n=2")
+    .then(r => r.json())
+    .then(data =>{
+          //  console.log(data)
+         
+          //  debugger
+          
+          setCase([...new Map(data.list.map(c => [c => c.uid(c), c])).values()])
+           
+          })
+  }, [])
+
   
-  const loginUser = (u) => {
-    setLoggedIn(true)
-    setUser(u)
-    history.push("/")
+  // const loginUser = (u) => {
+  //   setLoggedIn(true)
+  //   setUser(u)
+  //   history.push("/")
+  // } 
+
+  const loginUser = (user) => {
+    if (!user.errors) {
+      setLoggedIn(true)
+      setUser(user)
+      history.push('/')
+    } 
+    else {
+      setErrors(user.errors)
+      
+    }
   } 
 
   const logoutUser = () => {
@@ -47,14 +79,32 @@ function App(props) {
   }
 
   return (
+
     <div className="App">
-      <Navbar user={user} loggedIn={loggedIn} logoutUser={logoutUser}/>
-      <Switch>
-        <Route exact path="/" component={Home} /> 
-        <Route exact path="/signup" render={routerProps => <SignUp {...routerProps} loginUser={loginUser}/>} /> 
-        <Route exact path="/login" render={routerProps => <Login {...routerProps} loginUser={loginUser}/>} /> 
-  
-      </Switch>
+            <div className="App_header">
+                <img 
+                    className='App_headerImage'
+                    src={logo}
+                    alt=""
+                />
+                <Navbar user={user} loggedIn={loggedIn} logoutUser={logoutUser}/>
+                
+                
+               
+            </div>
+          
+            <h3> Chest Xray Radiograph Review</h3>
+                  <Switch>
+                      <Route exact path="/"  render={routerProps => <Post {...routerProps} caseData={caseData} loginUser={loginUser} errors={errors}/>} />
+                      <Route exact path="/signup" render={routerProps => <SignUp {...routerProps} loginUser={loginUser} errors={errors}/>} /> 
+                      <Route exact path="/login" render={routerProps => <Login {...routerProps} loginUser={loginUser} errors={errors}/>} />  
+                  </Switch>
+
+            {/* <Post caseData={caseData}></Post>  */}
+            
+
+            
+     
     </div>
   );
 }

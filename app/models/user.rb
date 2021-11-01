@@ -1,9 +1,7 @@
 class User < ApplicationRecord
-    #validations
+    validates :name, presence: true, uniqueness: true
 
-    #has_many
-
-    #
-    
     has_secure_password
+    
+    # has_many :states
 end
