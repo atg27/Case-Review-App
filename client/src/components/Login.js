@@ -26,25 +26,6 @@ const Login = ({loginUser, errors}) => {
 
 
     return (
-        // <form onSubmit={handleSubmit}>
-        //     <label>Name:</label>
-        //     <input 
-        //         type="text"
-        //         id="name"
-        //         value={name}
-        //         onChange={(e) => setName(e.target.value)}
-        //     />
-        //     <br/>
-        //     <label>Password:</label>
-        //     <input 
-        //         type="text"
-        //         id="password"
-        //         value={password}
-        //         onChange={(e) => setPassword(e.target.value)}
-        //     />
-        //     <br/>
-        //     <input type="submit"/>
-        // </form>
         <div className="login" style={{marginBottom: 80, padding: 100}}>
         <form onSubmit={handleSubmit}>
          <label>Name:</label>

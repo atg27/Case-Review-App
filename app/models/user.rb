@@ -3,5 +3,5 @@ class User < ApplicationRecord
 
     has_secure_password
     
-    # has_many :states
+    has_many :cases
 end

@@ -1,30 +1,31 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
-
+import './NavBar.css'
 
 const Navbar = (props) => {
 
     if (props.loggedIn) {
         return (
-            <div>
-                <h1>Hello {props.user.name}!</h1>
+            <div className="Navbar">
                 <br/>
-                
-                    <button onClick={props.logoutUser}>Logout</button>
-                    <Link to="/posts"> <button> {props.user.name}'s Posts </button> </Link>
                     <Link to="/"> <button> {props.username} Home </button> </Link>
+                    
+                    <Link to="/posts"> <button> {props.user.name}'s Saved Cases </button> 
+                    
+                    </Link> <button onClick={props.logoutUser}>Logout</button>
             </div>
         )
     } else {
         return (
-        <div>
+        <div className="Navbar">
+            <Link to="/"> <button> {props.username} Home </button> </Link>
             <br/>
             <Link to="/signup" >
-                <button>Signup</button>
+                <button onClick={props.clearErrors}>Signup</button>
             </Link>
             <br/>
             <Link to="/login" >
-                <button>Login</button>
+                <button onClick={props.clearErrors}>Login</button>
             </Link>
         </div>
         )
