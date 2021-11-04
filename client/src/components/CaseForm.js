@@ -11,7 +11,7 @@ import React, {useState} from 'react'
         props.addCase({
             title: title,
             image: image,
-            impression: impression,
+            impression: impression
         })
     }
 
