@@ -9,9 +9,9 @@ import React, {useState} from 'react'
     const handleSubmit = (e) => {
         e.preventDefault()
         props.addCase({
-            title: title;
-            image: image;
-            impression: impression;
+            title: title,
+            image: image,
+            impression: impression,
         })
     }
 
