@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom'
-import Home from './Home'
 import Navbar from './NavBar'
 import SignUp from './SignUp';
 import Login from './Login'
@@ -10,6 +9,8 @@ import logo from './xrayicon.png'
 import Post from './Post'
 import './App.css'
 import Cases from './Cases'
+import Case from './Case'
+import CaseLink from './CaseLink'
 
 
 function App() {
@@ -73,37 +74,26 @@ function App() {
     setErrors([])
   }
 
-  const savePost= (caseCard) =>{
-    console.log('saving case')
-    const newSavedList = [...saved, caseCard];
-    setSaved(newSavedList)
-  }
+const addCase = (c) => {
+  fetch('/cases', {
+  method: 'POST',
+  headers: {
+      'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(c)
+})
+  .then(r => r.json())
+  .then(data => {
+          console.log(data)
+      })
+}
 
+  //for FE
   const removePost = (id) =>{
     console.log('removing case')
     const newSavedList = saved.filter(c => c.id !== id);
     setSaved(newSavedList)
   }
-
-  //   fetch('/cases', {
-  //     method: 'POST',
-  //     headers: {
-  //         'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(c)
-  // })
-  //     .then(r => r.json())
-  //     .then(data => {
-  
-  //         if(data.errors) {
-  //             setErrors(data.errors)
-  //         } else {
-  //             console.log(data)
-  //         setCases([...cases, data])
-  //         setFormFlag(false)
-  //         setErrors([])
-  //         }
-  //     })
   
 
  
@@ -122,10 +112,11 @@ function App() {
           
             
                   <Switch>
-                      <Route exact path="/"  render={routerProps => <Post {...routerProps} caseData={caseData} loginUser={loginUser} errors={errors} loggedIn={loggedIn} savePost={savePost}/>} />
+                      <Route exact path="/"  render={routerProps => <Post {...routerProps} caseData={caseData} loginUser={loginUser} errors={errors} loggedIn={loggedIn} addCase={addCase}/>} />
                       <Route exact path="/signup" render={routerProps => <SignUp {...routerProps} loginUser={loginUser} errors={errors}/>} /> 
                       <Route exact path="/login" render={routerProps => <Login {...routerProps} loginUser={loginUser} errors={errors}/>} />  
                       <Route exact path="/cases" render={routerProps => <Cases {...routerProps} saved={saved} user={user} loginUser={loginUser} errors={errors} removePost={removePost}/>} />  
+                      <Route path="/cases/:id" render={routerProps => <Case {...routerProps} saved={saved} user={user} loginUser={loginUser} errors={errors} removePost={removePost}/>}/>
                   </Switch>     
     </div>
   );

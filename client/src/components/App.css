@@ -1,5 +1,6 @@
 .App{
     background-color: fafafa;
+    height: 100vh;
 }
 
 .App_header{
@@ -13,4 +14,12 @@
 
 .App_headerImage{
     object-fit: contain;
+    height: auto;
+    width: 80px;
+    background-color: white;
 }
+
+*{
+    margin: 0
+}
+

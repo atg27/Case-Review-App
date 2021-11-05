@@ -17,6 +17,20 @@ class CasesController < ApplicationController
           end
     end
 
+    def destroy
+        user = User.find_by(id: session[:user_id])
+        casecard = user.cases.find_by(id: params[:id])
+        casecard.destroy
+        head :no_content
+    end
+
+    def update
+        user = User.find_by(id: session[:user_id])
+        casecard = user.cases.find_by(id: params[:id])
+        casecard.update(case_params)
+        render json: casecard
+    end
+
     def show
         user = User.find_by(id: session[:user_id])
         casecard = user.cases.find_by(id: params[:id])
@@ -27,19 +41,6 @@ class CasesController < ApplicationController
         end
     end
 
-    def update
-        user = User.find_by(id: session[:user_id])
-        casecard = user.cases.find_by(id: params[:id])
-        casecard.update(case_params)
-        render json: casecard
-    end
-
-    def destroy
-        user = User.find_by(id: session[:user_id])
-        casecard = user.cases.find_by(id: params[:id])
-        casecard.destroy
-        head :no_content
-    end
     private
 
     def case_params

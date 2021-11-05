@@ -4,6 +4,9 @@ import Avatar from "@material-ui/core/Avatar"
 
 
 function Post(props) {
+
+    
+
     if(props.loggedIn){
     return (
             <div className="post_container">
@@ -17,7 +20,7 @@ function Post(props) {
                             />
                             <h3 className="post_title">{c.title} </h3>   
                         </div>
-                        <button onClick={() => props.savePost(c)}>save post</button>
+                        <button onClick={() => props.addCase(c)}>save post</button>
                         <img className="post_image" src={'https://openi.nlm.nih.gov'+ c.imgLarge}/>
                         <h4 className="post_caption"><b>Impression</b>: {c.image.caption}</h4>
                     </div>

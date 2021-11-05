@@ -4,14 +4,14 @@ import React, {useState} from 'react'
 
     const [title, setTitle] = useState("")
     const [image, setImage] = useState("")
-    const [impression, sestImpression] = useState("")
+    const [caption, setCaption] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault()
         props.addCase({
             title: title,
             image: image,
-            impression: impression
+            caption: caption
         })
     }
 
@@ -33,11 +33,11 @@ import React, {useState} from 'react'
                     onChange={(e) => setImage(e.target.value)}
                 />
                 <br/>
-                <label>Impression:</label>
+                <label>Caption:</label>
                 <input 
                     type="name"
-                    value={impression}
-                    onChange={(e) => sestImpression(e.target.value)}
+                    value={caption}
+                    onChange={(e) => setCaption(e.target.value)}
                 />
                 <br/>
                 <input type="submit"/>
