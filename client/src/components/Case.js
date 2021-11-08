@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import Avatar from "@material-ui/core/Avatar"
+// import Avatar from "@material-ui/core/Avatar"
 import './cases.css'
 import CaseEditForm from './CaseEditForm'
+import { Button } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+
 
 
 
  const Case = (props) => {
     const [caseCard, setCaseCard] = useState({})
     const [errors, setErrors ] = useState('')
-
     const [formFlag, setFormFlag] = useState(false) 
 
     const switchFormFlag = () => {
@@ -27,16 +29,43 @@ import CaseEditForm from './CaseEditForm'
         })
     }, [])
 
+    const editCase = (editedCase) => {
+        fetch(`/cases/${editedCase.id}`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(editedCase)
+        })
+        .then(r => r.json())
+        .then((data)=>{
+            setCaseCard(data)
+        })
+    }
+
+
 
         if (errors==="") { 
             return (
-                <div className="post_card">
-                
-                <h2 className="post_title">{caseCard.title}</h2>
-                <img className="post_image" src={caseCard.image}/>
-                <h4 className="post_caption"><b>Impression</b>: {caseCard.caption}
-                </h4>
-            </div>
+                <div>
+                    <div className="edit_form">
+                             {
+                                formFlag? <CaseEditForm caseCard={caseCard} switchFormFlag={switchFormFlag} editCase={editCase}></CaseEditForm>
+                                :
+                                <Button className="edit_button" style={{float: "center"}} variant="contained" color="success" size="small" startIcon={< EditIcon/>}  onClick={switchFormFlag}> edit case </Button>
+                            }
+                    </div>
+                           
+                        <br></br>
+                    
+                    <div className="case_card">
+                        <h3 className="post_title">{caseCard.title}</h3>
+                        <img className="post_image" src={caseCard.image}/>
+                        <h4 className="post_caption"><b>Impression</b>: {caseCard.caption}</h4> 
+                    </div>
+                    
+                </div>
+            
             )
         } else {
             return (

@@ -2,9 +2,11 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import Case from './Case'
 import CaseForm from './CaseForm'
-import Avatar from "@material-ui/core/Avatar"
+// import Avatar from "@material-ui/core/Avatar"
 import './cases.css'
 import CaseLink from './CaseLink'
+import { Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
 
 const Cases = (props) => {
@@ -55,91 +57,40 @@ const Cases = (props) => {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(() => {
-                const filteredCases = cases.filter(c => c.id !== c)
-                
-                setCases(filteredCases)
+            .then((r) => {
+                if (r.ok){
+                handleDeleteClick(id)
+                }  
             })
         }
     
-        const editCase = (editedCase) => {
-            fetch(`/cases/${editedCase.id}`, {
-                method: "PATCH",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(editedCase)
-            })
-            .then(r => r.json())
-            .then((data)=>{
-                console.log(data)
-                const editedCases = cases.map(c => c.id === editedCase.id? editedCase : c)
-                setCases(editedCase)
-            })
+        function handleDeleteClick(id) {
+            const updatedCases = cases.filter((c) => c.id !== id);
+            setCases(updatedCases)
         }
     
 
         const errorsList = casesErrors.map(e => <div key={e.id} style={{ textTransform: 'uppercase', marginBottom: '20px', marginTop: '20px', color: 'red'}}><ul key={e.id}>{e}</ul></div>)
     
-        const casesListLink = cases.map(c => <CaseLink key={c.id} cases={c} editCase={editCase} deleteCase={deleteCase} ></CaseLink>)
+        const casesListLink = cases.map(c => <CaseLink key={c.id} cases={c} deleteCase={deleteCase} ></CaseLink>)
                 
         if (error === '') {
              return (
-                    <div className=''>
-                        Saved Case List Below:
-                        <br></br>
-                        <br></br>
-    
-                        
-                    <div className="case_form">
-                         {formFlag ? 
-                            <CaseForm addCase={addCase}/> 
-                            : 
-                            <button style={{border: '2px solid green', color: 'Green', display: 'flex', }} 
-                                onClick={() => setFormFlag(true)}>Add A Custom Case
-                            </button>
-                        }
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
-                    </div>
-                       
-                         
-                        <div className="post_container">
-                            {/* {props.saved.map((c, idx) =>(
-                                <div className="post_card" key={idx}> 
-                                <div className="post_header">
-                                    <Avatar
-                                    className="post_avatar"
-                                    alt={`${props.user}`}
-                                    src="" 
-                                    />
-                                    <h3 className="post_title">{c.title} </h3>   
-                                </div>
-                                    <button onClick={() => props.removePost(c)}>remove post</button>
-                                    <img className="post_image" src={'https://openi.nlm.nih.gov'+ c.imgLarge}/>
-                                    <h4 className="post_caption"><b>Impression</b>: {c.image.caption}</h4>
-                                </div>
-                                ))} */}
-                            
-                            {/* {cases.map((c, idx) =>(
-                                <div className="post_card" key={idx}> 
-                                <div className="post_header">
-                                    <Avatar
-                                    className="post_avatar"
-                                    alt={`${props.user}`}
-                                    src="" 
-                                    />
-                                    <h3 className="post_title">{c.title} </h3>   
-                                </div>
-                                    <button onClick={() => props.removePost(c)}>remove post</button>
-                                    <img className="post_image" src={c.image}/>
-                                    <h4 className="post_caption"><b>Impression</b>: {c.caption}</h4>
-                                </div>
-                                ))} */}
+                    <div className='cases_list'>
+                        <div className="cases_header">
+                            <h3>{`${props.user.name}'s Saved Cases`}</h3>
+                            <br></br>
+                            {formFlag ? 
+                                <CaseForm addCase={addCase}/> 
+                                : 
+                                <Button style={{float: "center"}} variant="contained" color="success" size="small" startIcon={<AddIcon />}
+                                    onClick={() => setFormFlag(true)}>Add A Custom Case
+                                </Button>
+                            }
                         </div>
+                        <br></br>
+                        <br></br>
                         {errorsList}
-                        {/* {casesList} */}
                         {casesListLink}
                     </div>
             )

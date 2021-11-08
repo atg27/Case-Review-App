@@ -22,8 +22,6 @@ function App() {
   const [errors, setErrors] = useState([]);
   const [saved, setSaved] = useState([]);
 
-//test push
-
   useEffect(()=> {
     fetch('/me')
     .then(r => {
@@ -74,29 +72,25 @@ function App() {
     setErrors([])
   }
 
-const addCase = (c) => {
-  fetch('/cases', {
-  method: 'POST',
-  headers: {
-      'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(c)
-})
-  .then(r => r.json())
-  .then(data => {
-          console.log(data)
-      })
-}
-
-  //for FE
-  const removePost = (id) =>{
-    console.log('removing case')
-    const newSavedList = saved.filter(c => c.id !== id);
-    setSaved(newSavedList)
+  const addCase = (c) => {
+    fetch('/cases', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      title: c.title,
+      image: 'https://openi.nlm.nih.gov'+c.imgLarge,
+      caption: c.image.caption,
+      
+    })
+  })
+    .then(r => r.json())
+    .then(data => {
+            console.log(data)
+        })
   }
-  
 
- 
   return (
     <div className="App">
              <div className="App_header">
@@ -115,8 +109,8 @@ const addCase = (c) => {
                       <Route exact path="/"  render={routerProps => <Post {...routerProps} caseData={caseData} loginUser={loginUser} errors={errors} loggedIn={loggedIn} addCase={addCase}/>} />
                       <Route exact path="/signup" render={routerProps => <SignUp {...routerProps} loginUser={loginUser} errors={errors}/>} /> 
                       <Route exact path="/login" render={routerProps => <Login {...routerProps} loginUser={loginUser} errors={errors}/>} />  
-                      <Route exact path="/cases" render={routerProps => <Cases {...routerProps} saved={saved} user={user} loginUser={loginUser} errors={errors} removePost={removePost}/>} />  
-                      <Route path="/cases/:id" render={routerProps => <Case {...routerProps} saved={saved} user={user} loginUser={loginUser} errors={errors} removePost={removePost}/>}/>
+                      <Route exact path="/cases" render={routerProps => <Cases {...routerProps} saved={saved} user={user} loginUser={loginUser} errors={errors} />} />  
+                      <Route path="/cases/:id" render={routerProps => <Case {...routerProps} saved={saved} user={user} loginUser={loginUser} errors={errors} />}/>
                   </Switch>     
     </div>
   );
