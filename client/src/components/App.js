@@ -10,7 +10,6 @@ import Post from './Post'
 import './App.css'
 import Cases from './Cases'
 import Case from './Case'
-import CaseLink from './CaseLink'
 
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
   const history = useHistory();
   const [caseData, setCase] = useState([]);
   const [errors, setErrors] = useState([]);
-  const [saved, setSaved] = useState([]);
 
   useEffect(()=> {
     fetch('/me')
@@ -109,8 +107,8 @@ function App() {
                       <Route exact path="/"  render={routerProps => <Post {...routerProps} caseData={caseData} loginUser={loginUser} errors={errors} loggedIn={loggedIn} addCase={addCase}/>} />
                       <Route exact path="/signup" render={routerProps => <SignUp {...routerProps} loginUser={loginUser} errors={errors}/>} /> 
                       <Route exact path="/login" render={routerProps => <Login {...routerProps} loginUser={loginUser} errors={errors}/>} />  
-                      <Route exact path="/cases" render={routerProps => <Cases {...routerProps} saved={saved} user={user} loginUser={loginUser} errors={errors} />} />  
-                      <Route path="/cases/:id" render={routerProps => <Case {...routerProps} saved={saved} user={user} loginUser={loginUser} errors={errors} />}/>
+                      <Route exact path="/cases" render={routerProps => <Cases {...routerProps} user={user} loginUser={loginUser} errors={errors} />} />  
+                      <Route path="/cases/:id" render={routerProps => <Case {...routerProps}  user={user} loginUser={loginUser} errors={errors} />}/>
                   </Switch>     
     </div>
   );

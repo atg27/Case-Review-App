@@ -1,8 +1,6 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
-import Case from './Case'
 import CaseForm from './CaseForm'
-// import Avatar from "@material-ui/core/Avatar"
 import './cases.css'
 import CaseLink from './CaseLink'
 import { Button } from '@mui/material';

@@ -2,7 +2,6 @@ import React from 'react'
 import './Post.css'
 import Avatar from "@material-ui/core/Avatar"
 import { Button } from '@mui/material';
-// import DeleteIcon from '@mui/icons-material/Delete';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 
@@ -21,7 +20,7 @@ function Post(props) {
                             <h3 className="post_title">{c.title} </h3>   
                             <Button className="post_button" variant="contained" color="success" size="small" startIcon={<BookmarkIcon />} onClick={() => props.addCase(c)}> Save</Button>
                         </div>
-                        <img className="post_image" src={'https://openi.nlm.nih.gov'+ c.imgLarge}/>
+                        <img className="post_image" alt='' src={'https://openi.nlm.nih.gov'+ c.imgLarge}/>
                         <h4 className="post_caption"><b>Impression</b>: {c.image.caption}</h4>
                     </div>
                 ))}
@@ -39,7 +38,7 @@ function Post(props) {
                             />
                             <h3 className="post_title">{c.title} </h3>   
                         </div>
-                        <img className="post_image" src={'https://openi.nlm.nih.gov'+ c.imgLarge}/>
+                        <img className="post_image" alt='' src={'https://openi.nlm.nih.gov'+ c.imgLarge}/>
                         <h4 className="post_caption"><b>Impression</b>: {c.image.caption}</h4>
                     </div>
                 ))}

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-// import Avatar from "@material-ui/core/Avatar"
 import './cases.css'
 import CaseEditForm from './CaseEditForm'
 import { Button } from '@mui/material';
@@ -27,7 +26,7 @@ import EditIcon from '@mui/icons-material/Edit';
                     setCaseCard(data)
                 }
         })
-    }, [])
+    },[])
 
     const editCase = (editedCase) => {
         fetch(`/cases/${editedCase.id}`, {
@@ -60,7 +59,7 @@ import EditIcon from '@mui/icons-material/Edit';
                     
                     <div className="case_card">
                         <h3 className="post_title">{caseCard.title}</h3>
-                        <img className="post_image" src={caseCard.image}/>
+                        <img className="post_image" alt='' src={caseCard.image}/>
                         <h4 className="post_caption"><b>Impression</b>: {caseCard.caption}</h4> 
                     </div>
                     

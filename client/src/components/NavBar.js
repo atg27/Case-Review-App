@@ -1,33 +1,28 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-// import './NavBar.css'
+import { NavLink } from 'react-router-dom'
+import './NavBar.css'
+import { Button } from '@mui/material';
+
 
 const Navbar = (props) => {
 
     if (props.loggedIn) {
         return (
-            <div className="Navbar">
-                <br/>
-                    <Link to="/"> <button> {props.username} Home </button> </Link>
+            <nav className="Navbar">
+                <NavLink to="/"> <Button style={{float: "center"}} variant="contained" color="success" size="small" >{props.username} Home</Button></NavLink>
                     
-                    <Link to="/cases"> <button> {props.user.name}'s Saved Cases </button> 
+                <NavLink to="/cases"> <Button style={{float: "center"}} variant="contained" color="success" size="small" >{props.user.name}'s Saved Cases</Button>
                     
-                    </Link> <button onClick={props.logoutUser}>Logout</button>
-            </div>
+                </NavLink> <Button style={{float: "center"}} variant="contained" color="success" size="small" onClick={props.logoutUser}>Logout</Button>
+            </nav>
         )
     } else {
         return (
-        <div className="Navbar">
-            <Link to="/"> <button> {props.username} Home </button> </Link>
-            <br/>
-            <Link to="/signup" >
-                <button onClick={props.clearErrors}>Signup</button>
-            </Link>
-            <br/>
-            <Link to="/login" >
-                <button onClick={props.clearErrors}>Login</button>
-            </Link>
-        </div>
+        <nav className="Navbar">
+            <NavLink to="/"> <button> {props.username} Home </button> </NavLink>
+            <NavLink to="/signup" ><button onClick={props.clearErrors}>Signup</button></NavLink>
+            <NavLink to="/login" ><button onClick={props.clearErrors}>Login</button></NavLink>
+        </nav>
         )
     }
     

@@ -1,7 +1,7 @@
 import {React, useState} from 'react'
 
  const CaseEditForm = (props) => {
-    const [id, setId] = useState(props.caseCard.id)
+    const [id] = useState(props.caseCard.id)
     const [title, setTitle] = useState(props.caseCard.title)
     const [image, setImage] = useState(props.caseCard.image)
     const [caption, setCaption] = useState(props.caseCard.caption)
