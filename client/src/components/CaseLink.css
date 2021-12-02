@@ -1,0 +1,28 @@
+.link_container{
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+.link_card{
+    background-color: white;
+    max-width: 500px;
+    border: 1px solid lightgray;
+    margin-bottom: 45px;
+    justify-content: center;
+   margin-left: auto;
+   margin-right: auto;
+   padding-top: 20px;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+   text-align: center;
+}
+
+.link_image{
+    width: 100%;
+    object-fit: contain;
+    border-top: 1px lightgray;
+    border-bottom: 1px lightgray;
+}
+

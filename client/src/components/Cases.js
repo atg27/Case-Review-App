@@ -76,7 +76,9 @@ const Cases = (props) => {
              return (
                     <div className='cases_list'>
                         <div className="cases_header">
-                            <h3>{`${props.user.name}'s Saved Cases`}</h3>
+                            <h2>{`${props.user.name}'s Saved Cases:`}</h2>
+                            <br></br>
+                            <h4>Click On a Case Title to Review Impression</h4>
                             <br></br>
                             {formFlag ? 
                                 <CaseForm addCase={addCase}/> 
